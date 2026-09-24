@@ -33,14 +33,45 @@
 """
 CMPUT 331 Assignment 2 Student Solution
 September 2026
-Author: <Your name here>
+Author: Albert Ganut
 """
 
+import math
+
 def encipherMessage(key: int, message: str) -> str:
-    raise NotImplementedError()
+
+    ciphertext = [""] * key # initializes an empty list of strings the size of the key 
+
+    for column in range(key):
+
+        current_index = column
+
+        while current_index < len(message): # runs as long as we still have characters to go through
+            ciphertext[column] += message[current_index] # add the character at the current index to the current column
+            current_index += key # go to the next character in the current column
+
+    return "".join(ciphertext) 
 
 def decipherMessage(key: int, message: str) -> str:
-    raise NotImplementedError()
+
+    num_of_cols = int(math.ceil(len(message) / float(key))) # calculates how many columns we need to create the grid by dividing the length of the message by the key and rounding up to the nearest int
+    num_of_rows = key # sets the HEIGHT of the grid
+    num_of_shaded_boxes = (num_of_cols * num_of_rows) - len(message)
+
+    plaintext = [""] * num_of_cols # initializes an empty list of strings the size of the number of columns
+
+    col = 0
+    row = 0
+
+    for symbol in message: # loops through the ciphertext 
+        plaintext[col] += symbol # adds the current symbol to the current column in the plaintext list
+        col += 1
+
+        if (col == num_of_cols) or (col == num_of_cols - 1 and row >= num_of_rows - num_of_shaded_boxes): # runs if we've reached the end of a column, or if we're at the last column and we've reached the last row that's not shaded
+            col = 0 # go back to the first column
+            row += 1 # go to the next row
+
+    return "".join(plaintext)
 
 def test():
     assert encipherMessage(5, "CIPHERS ARE FUN") == "CREIS P FHAUERN"
