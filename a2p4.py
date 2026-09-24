@@ -33,7 +33,7 @@
 """
 CMPUT 331 Assignment 2 Student Solution
 September 2026
-Author: <Your name here>
+Author: Albert Ganut
 """
 
 from typing import List
