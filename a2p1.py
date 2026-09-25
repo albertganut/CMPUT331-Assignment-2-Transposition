@@ -54,7 +54,7 @@ def encipherMessage(key: int, message: str) -> str:
 
 def decipherMessage(key: int, message: str) -> str:
 
-    num_of_cols = int(math.ceil(len(message) / float(key))) # calculates how many columns we need to create the grid by dividing the length of the message by the key and rounding up to the nearest int
+    num_of_cols = int(math.ceil(len(message) / key)) # calculates how many columns we need to create the grid by dividing the length of the message by the key and rounding up to the nearest int
     num_of_rows = key # sets the HEIGHT of the grid
     num_of_shaded_boxes = (num_of_cols * num_of_rows) - len(message)
 
