@@ -39,11 +39,25 @@ Author: Albert Ganut
 from typing import List
 
 def encipherMessage(key: List[int], message: str) -> str:
-    raise NotImplementedError()
+
+    ciphertext = [] # will hold the final ciphertext as a list of strings
+
+    for col_num in key: # go through each col that's associated with the key
+
+        current_index = col_num - 1 
+        col_str = "" # holds the string for the current column
+
+        while current_index < len(message): # runs if the current index is still within the bounds (the length) of the message
+            col_str += message[current_index] # add the character at the current index to the col_str
+            current_index += len(key)
+
+        ciphertext.append(col_str)
+
+    return "".join(ciphertext)
 
 def test():
     assert encipherMessage([2, 4, 1, 5, 3], "CIPHERS ARE FUN") == "IS HAUCREERNP F"
-   
+
 
 from sys import flags
 
